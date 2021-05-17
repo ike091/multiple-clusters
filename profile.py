@@ -35,7 +35,7 @@ if params.node_count < 1:
 
 # Create a variable number of nodes
 nodes = []
-for i in range(1, node_count + 1):
+for i in range(1, params.node_count + 1):
     nodes.append(request.RawPC('node' + str(i)))
 
 # Set node images
