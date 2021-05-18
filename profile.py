@@ -21,16 +21,32 @@ request = pc.makeRequestRSpec()
 # Create some user-configurable parameters
 pc.defineParameter('public_ip_count', 'The number of additional public IPs to allocate', portal.ParameterType.INTEGER, 2)
 pc.defineParameter('node_count', 'The number of nodes to create', portal.ParameterType.INTEGER, 2)
+pc.defineParameter('lan_latency', 'Simulated additional latency (ms)', portal.ParameterType.INTEGER, 0)
+pc.defineParameter('lan_packet_loss', 'Simulated additional packet loss (0.0 - 1.0)', portal.ParameterType.STRING, '0.0')
 
 params = pc.bindParameters()
 
-# Validate parameters
+# Validate public ip count
 if params.public_ip_count < 1:
     pc.reportError(portal.ParameterError('You must allocate at least 1 additional public ip.', ['public_ip_count']))
 pc.verifyParameters()
 
+# Validate node count
 if params.node_count < 1:
-    pc.reportError(portal.ParameterError('You must create at least 1 node', ['node_count']))
+    pc.reportError(portal.ParameterError('You must create at least 1 node.', ['node_count']))
+
+# Validate simulated latency
+if params.lan_latency < 0:
+    pc.reportError(portal.ParameterError('The latency parameter must be positive.', ['lan_latency']))
+
+# Validate simulated packet loss
+packet_loss_float = 0
+try:
+    packet_loss_float = float(params.lan_packet_loss)
+except:
+    pc.reportError(portal.ParameterError('The packet loss parameter is not valid.', ['lan_packet_loss']))
+if packet_loss_float < 0.0 or packet_loss_float > 1.0:
+    pc.reportError(portal.ParameterError('The packet loss parameter must be between 0.0 and 1.0', ['lan_packet_loss']))
 
 
 # Create a variable number of nodes
@@ -49,8 +65,16 @@ request.addResource(addressPool)
 # Add LAN to the rspec. 
 lan = request.LAN("lan")
 
-# Must provide a bandwidth. BW is in Kbps
-lan.bandwidth = 100000
+# Add a link to the request and then add the interfaces to the link
+link = request.Link("link")
+
+# Specify duplex parameters for each of the nodes in the link (or lan).
+# BW is in Kbps
+link.bandwidth = 110000
+# Latency is in milliseconds
+link.latency = params.lan_latency
+# Packet loss is a number 0.0 <= loss <= 1.0
+link.plr = packet_loss_float
 
 interfaces = []
 # Add interfaces to nodes
