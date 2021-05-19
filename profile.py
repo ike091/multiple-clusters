@@ -91,7 +91,6 @@ for interface in interfaces:
 def run_install_script(this_node, script_name):
     """Runs a bash script from the install/ directory on a specific node."""
 
-    this_node.addService(pg.Execute(shell='sh', command='chmod +x /local/repository/install/' + script_name))
     this_node.addService(pg.Execute(shell='sh', command='/local/repository/install/' + script_name))
 
 
