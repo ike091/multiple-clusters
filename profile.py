@@ -18,6 +18,7 @@ pc = portal.Context()
 # Create a Request object to start building RSpec
 request = pc.makeRequestRSpec()
 
+
 # Create some user-configurable parameters
 pc.defineParameter('public_ip_count', 'The number of additional public IPs to allocate', portal.ParameterType.INTEGER, 2)
 pc.defineParameter('node_count', 'The number of nodes to create', portal.ParameterType.INTEGER, 2)
@@ -84,6 +85,17 @@ for node in nodes:
 # Add interfaces to LAN
 for interface in interfaces:
     lan.addInterface(interface)
+
+# Declare install script function
+def run_install_script(this_node, script_name):
+    """Runs a bash script from the install/ directory on a specific node."""
+
+    this_node.addService(pg.Execute(shell='sh', command='chmod +x /local/repository/install/' + script_name))
+    this_node.addService(pg.Execute(shell='sh', command='/local/repository/install/' + script_name))
+
+
+run_install_script(nodes[0], 'install_perfsonar.sh')
+
 
 # Output RSpec
 pc.printRequestRSpec(request)
