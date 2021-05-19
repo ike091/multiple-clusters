@@ -53,7 +53,8 @@ if packet_loss_float < 0.0 or packet_loss_float > 1.0:
 # Create a variable number of nodes
 nodes = []
 for i in range(1, params.node_count + 1):
-    nodes.append(request.RawPC('node' + str(i)))
+    #  nodes.append(request.RawPC('node' + str(i)))
+    nodes.append(request.XenVM('node' + str(i)))
 
 # Set node images
 for node in nodes:
