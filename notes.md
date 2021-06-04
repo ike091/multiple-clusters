@@ -9,7 +9,7 @@
 ## Experiments
 
 * Ran Nginx instances on each cluster and accessed from other cluster
-* Ran `iperf` both ways - around TODO
+* Ran `iperf` both ways - 105 to 106 megabits per second
 
 
 ### perfSONAR
