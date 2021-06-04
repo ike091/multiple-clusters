@@ -24,7 +24,7 @@ pc.defineParameter('public_ip_count', 'The number of additional public IPs to al
 pc.defineParameter('node_count', 'The number of nodes to create', portal.ParameterType.INTEGER, 2)
 pc.defineParameter('lan_latency', 'Simulated additional latency (ms)', portal.ParameterType.INTEGER, 0)
 pc.defineParameter('lan_packet_loss', 'Simulated additional packet loss (0.0 - 1.0)', portal.ParameterType.STRING, '0.0')
-pc.defineParameter('use_bare_metal', 'Whether to use bare metal machines', portal.ParameterType.BOOLEAN, False)
+pc.defineParameter('use_bare_metal', 'Use bare metal machines', portal.ParameterType.BOOLEAN, False)
 
 params = pc.bindParameters()
 
