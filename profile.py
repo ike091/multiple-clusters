@@ -24,6 +24,7 @@ pc.defineParameter('public_ip_count', 'The number of additional public IPs to al
 pc.defineParameter('node_count', 'The number of nodes to create', portal.ParameterType.INTEGER, 2)
 pc.defineParameter('lan_latency', 'Simulated additional latency (ms)', portal.ParameterType.INTEGER, 0)
 pc.defineParameter('lan_packet_loss', 'Simulated additional packet loss (0.0 - 1.0)', portal.ParameterType.STRING, '0.0')
+pc.defineParameter('use_bare_metal', 'Whether to use bare metal machines', portal.ParameterType.BOOLEAN, False)
 
 params = pc.bindParameters()
 
@@ -53,11 +54,13 @@ if packet_loss_float < 0.0 or packet_loss_float > 1.0:
 # Create a variable number of nodes
 nodes = []
 for i in range(1, params.node_count + 1):
-    #  nodes.append(request.RawPC('node' + str(i)))
-    node = request.XenVM('node' + str(i))
-    node.cores = 2
-    node.ram = 4096
-    nodes.append(node)
+    if params.use_bare_metal:
+        nodes.append(request.RawPC('node' + str(i)))
+    else:
+        node = request.XenVM('node' + str(i))
+        node.cores = 2
+        node.ram = 4096
+        nodes.append(node)
 
 # Set node images
 for node in nodes:
@@ -93,10 +96,8 @@ def run_install_script(this_node, script_name):
 
     this_node.addService(pg.Execute(shell='sh', command='/local/repository/install/' + script_name))
 
-
-run_install_script(nodes[0], 'install_perfsonar.sh')
-
+# Install scripts:
+#  run_install_script(nodes[0], 'install_perfsonar.sh')
 
 # Output RSpec
 pc.printRequestRSpec(request)
-
