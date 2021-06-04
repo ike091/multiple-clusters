@@ -54,7 +54,10 @@ if packet_loss_float < 0.0 or packet_loss_float > 1.0:
 nodes = []
 for i in range(1, params.node_count + 1):
     #  nodes.append(request.RawPC('node' + str(i)))
-    nodes.append(request.XenVM('node' + str(i)))
+    node = request.XenVM('node' + str(i))
+    node.cores = 2
+    node.ram = 4096
+    nodes.append(node)
 
 # Set node images
 for node in nodes:
@@ -67,16 +70,13 @@ request.addResource(addressPool)
 # Add LAN to the rspec. 
 lan = request.LAN("lan")
 
-# Add a link to the request and then add the interfaces to the link
-link = request.Link("link")
-
 # Specify duplex parameters for each of the nodes in the link (or lan).
 # BW is in Kbps
-link.bandwidth = 110000
+lan.bandwidth = 110000
 # Latency is in milliseconds
-link.latency = params.lan_latency
+lan.latency = params.lan_latency
 # Packet loss is a number 0.0 <= loss <= 1.0
-link.plr = packet_loss_float
+lan.plr = packet_loss_float
 
 interfaces = []
 # Add interfaces to nodes
