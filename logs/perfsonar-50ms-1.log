@@ -1,0 +1,107 @@
+========================================
+Pod: perfsonar-checker-cloudlab1-84f8b6f48f-pzhsm Container: logging-sidecar
+Get:1 http://security.debian.org/debian-security stretch/updates InRelease [53.0 kB]
+Ign:2 http://deb.debian.org/debian stretch InRelease
+Get:3 http://deb.debian.org/debian stretch-updates InRelease [93.6 kB]
+Get:4 http://deb.debian.org/debian stretch Release [118 kB]
+Get:5 http://deb.debian.org/debian stretch Release.gpg [2410 B]
+Get:6 http://security.debian.org/debian-security stretch/updates/main amd64 Packages [690 kB]
+Get:7 http://deb.debian.org/debian stretch/main amd64 Packages [7080 kB]
+Fetched 8037 kB in 2s (3842 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Suggested packages:
+  ca-certificates
+The following NEW packages will be installed:
+  openssl
+0 upgraded, 1 newly installed, 0 to remove and 30 not upgraded.
+Need to get 749 kB of archives.
+After this operation, 1347 kB of additional disk space will be used.
+Get:1 http://security.debian.org/debian-security stretch/updates/main amd64 openssl amd64 1.1.0l-1~deb9u3 [749 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 749 kB in 0s (4664 kB/s)
+Selecting previously unselected package openssl.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 7027 files and directories currently installed.)
+Preparing to unpack .../openssl_1.1.0l-1~deb9u3_amd64.deb ...
+Unpacking openssl (1.1.0l-1~deb9u3) ...
+Setting up openssl (1.1.0l-1~deb9u3) ...
+Your randomly generated logger credentials are
+**********************************************
+logger:bd5cec2963eb4025
+**********************************************
+========================================
+Pod: perfsonar-checker-cloudlab1-84f8b6f48f-pzhsm Container: perfsonar-testpoint
+2021-06-07 16:48:50,487 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2021-06-07 16:48:50,491 INFO supervisord started with pid 1
+2021-06-07 16:48:51,494 INFO spawned: 'httpd' with pid 8
+2021-06-07 16:48:51,497 INFO spawned: 'pscheduler-ticker' with pid 9
+2021-06-07 16:48:51,500 INFO spawned: 'postgresql' with pid 10
+2021-06-07 16:48:51,503 INFO spawned: 'pscheduler-scheduler' with pid 11
+2021-06-07 16:48:51,505 INFO spawned: 'pscheduler-archiver' with pid 12
+2021-06-07 16:48:51,508 INFO spawned: 'rsyslog' with pid 13
+2021-06-07 16:48:51,511 INFO spawned: 'pscheduler-runner' with pid 14
+2021-06-07 16:48:51,513 INFO spawned: 'slate-tests' with pid 15
+Waiting for local perfSONAR services to start up and be ready....
+2021-06-07 16:48:52,713 INFO success: httpd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021-06-07 16:48:52,713 INFO success: pscheduler-ticker entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021-06-07 16:48:52,713 INFO success: postgresql entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021-06-07 16:48:52,713 INFO success: pscheduler-scheduler entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021-06-07 16:48:52,713 INFO success: pscheduler-archiver entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021-06-07 16:48:52,713 INFO success: rsyslog entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021-06-07 16:48:52,713 INFO success: pscheduler-runner entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2021-06-07 16:48:52,713 INFO success: slate-tests entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+Local perfSONAR services are not ready yet...waiting for few seconds before checking again....
+Local perfSONAR services are not ready yet...waiting for few seconds before checking again....
+Local perfSONAR services are not ready yet...waiting for few seconds before checking again....
+Local perfSONAR services are not ready yet...waiting for few seconds before checking again....
+Local perfSONAR services are not ready yet...waiting for few seconds before checking again....
+Local perfSONAR services are not ready yet...waiting for few seconds before checking again....
+Local perfSONAR services are not ready yet...waiting for few seconds before checking again....
+Local perfSONAR services are not ready yet...waiting for few seconds before checking again....
+Local perfSONAR services are not ready yet...waiting for few seconds before checking again....
+Local perfSONAR services are not ready yet...waiting for few seconds before checking again....
+Local perfSONAR services are not ready yet...waiting for few seconds before checking again....
+Performing basic troubleshooting of localhost.
+
+localhost:
+
+  Measuring MTU... 65535 (Local)
+  Looking for pScheduler... OK.
+  Fetching API level... 4
+  Checking clock... OK.
+  Exercising API... Status... Tests... Tools... OK.
+  Fetching service status... OK.
+  Checking services... ticker... scheduler... runner... archiver... OK.
+  Idle test.... 9 seconds.... Checking archiving... OK.
+
+pScheduler appears to be functioning normally.
+
+
+Running throughput test to: 'cloudlab2.slateci.net' .....
+Summary
+Interval       Throughput     Retransmits    Receiver Throughput 
+0.0 - 30.0     103.43 Mbps    0              102.55 Mbps
+
+
+Running latency test to: 'cloudlab2.slateci.net' .....
+Packet Statistics
+-----------------
+Packets Sent ......... 18000 packets
+Packets Received ..... 18000 packets
+Packets Lost ......... 0 packets
+Packets Duplicated ... 0 packets
+Packets Reordered .... 0 packets
+
+
+Checking network path to: 'cloudlab2.slateci.net' .....
+Number of hops to destination is: 1
+
+Running throughput test to: 'uofu-ddc-dmz-latency.chpc.utah.edu' .....
+Summary
+Interval       Throughput     Retransmits    Receiver Throughput 
+0.0 - 30.0     683.82 Mbps    0              682.79 Mbps
+
+
+Running latency test to: 'uofu-ddc-dmz-latency.chpc.utah.edu' .....

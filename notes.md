@@ -13,10 +13,13 @@
 
 
 ### perfSONAR
-
 * Used `/etc/hosts` to simulate DNS records
 * Ran `perfsonar-testpoint` on one cluster, and `perfsonar-checker` on the other
-* Repeated the other way around
-* See `multiple-clusters/logs` for results
+* Repeated both ways
 
+No added latency:
+* See `multiple-clusters/logs/perfsonar-output-1.log`, and `multiple-clusters/logs/perfsonar-output-2.log`
+
+50ms added latency:
+* See `multiple-clusters/logs/perfsonar-50ms-1.log`, and `multiple-clusters/logs/perfsonar-50ms-2.log`
 
